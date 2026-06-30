@@ -28,7 +28,7 @@ export default function EcosystemDiagram() {
         >
           <div className="rounded-xl overflow-hidden relative bg-[#0b1220]/50">
             <img
-              src="/images/ecosystem-diagram.png"
+              src="/images/oee.png"
               alt="BIT Automation Smart Manufacturing Ecosystem Diagram"
               className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]"
             />
@@ -64,7 +64,7 @@ export default function EcosystemDiagram() {
               className="relative max-w-[95vw] max-h-[92vh] w-auto h-auto flex items-center justify-center rounded-2xl overflow-hidden border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] bg-[#0B1220]/50"
             >
               <img
-                src="/images/ecosystem-diagram.png"
+                src="/images/oee.png"
                 alt="BIT Automation Smart Manufacturing Ecosystem Diagram"
                 className="max-w-full max-h-[92vh] object-contain rounded-xl"
               />
