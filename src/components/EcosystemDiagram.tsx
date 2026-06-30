@@ -10,7 +10,7 @@ export default function EcosystemDiagram() {
   return (
     <section id="ecosystem" className="py-24 bg-transparent relative overflow-hidden border-y border-white/5">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#0099FF]/10 via-transparent to-transparent"></div>
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="font-heading text-4xl font-bold mb-4">Smart Manufacturing <span className="text-[#00D4FF]">Ecosystem</span></h2>
@@ -19,7 +19,7 @@ export default function EcosystemDiagram() {
 
         {/* Ecosystem Image */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
@@ -68,9 +68,9 @@ export default function EcosystemDiagram() {
                 alt="BIT Automation Smart Manufacturing Ecosystem Diagram"
                 className="max-w-full max-h-[92vh] object-contain rounded-xl"
               />
-              <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 text-white text-sm font-bold font-heading">
+              {/*<div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 text-white text-sm font-bold font-heading">
                 Smart Manufacturing Ecosystem
-              </div>
+              </div>*/}
             </motion.div>
           </motion.div>
         )}
