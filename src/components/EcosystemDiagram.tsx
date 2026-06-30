@@ -1,16 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Network, MonitorSmartphone, Server, Activity, ArrowRightLeft } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
 export default function EcosystemDiagram() {
-  const nodes = [
-    { label: "Executive Dashboard", x: "50%", y: "15%", icon: <MonitorSmartphone size={20} /> },
-    { label: "ERP Integration", x: "85%", y: "40%", icon: <Server size={20} /> },
-    { label: "Production Monitoring", x: "15%", y: "40%", icon: <Activity size={20} /> },
-    { label: "IoT Sensors", x: "30%", y: "85%", icon: <Network size={20} /> },
-    { label: "Supply Chain", x: "70%", y: "85%", icon: <ArrowRightLeft size={20} /> },
-  ];
+  const [isZoomed, setIsZoomed] = useState(false);
 
   return (
     <section id="ecosystem" className="py-24 bg-transparent relative overflow-hidden border-y border-white/5">
@@ -22,72 +17,64 @@ export default function EcosystemDiagram() {
           <p className="text-gray-400">An interconnected environment where hardware and software work in perfect harmony.</p>
         </div>
 
-        <div className="relative h-[500px] max-w-4xl mx-auto hidden md:block">
-          {/* Central Hub */}
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 100 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full glass flex items-center justify-center flex-col z-20 border-[#0099FF]/50 neon-border"
-          >
-            <span className="font-heading font-bold text-xl text-center">BIT<br/>Automation<br/>Core</span>
-          </motion.div>
-
-          {/* Connection Lines (SVG) */}
-          <svg className="absolute inset-0 w-full h-full z-0" style={{ pointerEvents: 'none' }}>
-            {nodes.map((node, i) => (
-              <motion.line
-                key={`line-${i}`}
-                x1="50%" y1="50%"
-                x2={node.x} y2={node.y}
-                stroke="url(#gradientLine)"
-                strokeWidth="2"
-                strokeDasharray="5,5"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.5 }}
-              />
-            ))}
-            <defs>
-              <linearGradient id="gradientLine" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#0099FF" />
-                <stop offset="100%" stopColor="#00D4FF" />
-              </linearGradient>
-            </defs>
-          </svg>
-
-          {/* Orbiting Nodes */}
-          {nodes.map((node, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 * i, type: "spring" }}
-              className="absolute glass px-4 py-3 rounded-lg border-[#00D4FF]/30 flex items-center gap-2 -translate-x-1/2 -translate-y-1/2 z-10 whitespace-nowrap"
-              style={{ left: node.x, top: node.y }}
-            >
-              <div className="text-[#00D4FF]">{node.icon}</div>
-              <span className="font-medium text-sm">{node.label}</span>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Mobile representation (List instead of complex diagram) */}
-        <div className="md:hidden space-y-4">
-          <div className="glass p-6 rounded-xl border-[#0099FF]/50 text-center mb-6">
-            <h3 className="font-heading font-bold text-xl text-[#00D4FF]">BIT Automation Core</h3>
+        {/* Ecosystem Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          onClick={() => setIsZoomed(true)}
+          className="relative w-full max-w-5xl mx-auto glass rounded-2xl p-1.5 border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden cursor-zoom-in group"
+        >
+          <div className="rounded-xl overflow-hidden relative bg-[#0b1220]/50">
+            <img
+              src="/images/ecosystem.png"
+              alt="BIT Automation Smart Manufacturing Ecosystem Diagram"
+              className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]"
+            />
           </div>
-          {nodes.map((node, i) => (
-            <div key={i} className="glass p-4 rounded-lg flex items-center gap-4">
-              <div className="p-2 bg-[#12284C] rounded-md text-[#0099FF]">{node.icon}</div>
-              <span className="font-medium">{node.label}</span>
-            </div>
-          ))}
-        </div>
+          {/* Neon Glow Background */}
+          <div className="absolute -inset-4 bg-gradient-to-r from-[#0099FF]/10 to-[#00D4FF]/10 rounded-[36px] blur-2xl pointer-events-none -z-10 animate-pulse"></div>
+        </motion.div>
       </div>
+
+      {/* Zoom Modal */}
+      <AnimatePresence>
+        {isZoomed && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsZoomed(false)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-8 cursor-zoom-out"
+          >
+            <button
+              onClick={(e) => { e.stopPropagation(); setIsZoomed(false); }}
+              className="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all duration-300 z-50 cursor-pointer"
+            >
+              <X size={24} />
+            </button>
+
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 250 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-[95vw] max-h-[92vh] w-auto h-auto flex items-center justify-center rounded-2xl overflow-hidden border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] bg-[#0B1220]/50"
+            >
+              <img
+                src="/images/ecosystem.png"
+                alt="BIT Automation Smart Manufacturing Ecosystem Diagram"
+                className="max-w-full max-h-[92vh] object-contain rounded-xl"
+              />
+              <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 text-white text-sm font-bold font-heading">
+                Smart Manufacturing Ecosystem
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
