@@ -144,10 +144,10 @@ export default function HeroSection() {
                 alt={servicesData[currentIndex].title}
                 className="max-w-full max-h-[92vh] object-contain rounded-xl"
               />
-              {/* Overlay Title */}
+              {/* Overlay Title 
               <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 text-white text-sm font-bold font-heading">
                 {servicesData[currentIndex].title}
-              </div>
+              </div>*/}
             </motion.div>
           </motion.div>
         )}
