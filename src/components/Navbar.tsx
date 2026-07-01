@@ -26,7 +26,7 @@ export default function Navbar() {
     { name: "Industrial Automation", href: "/services/industrial-automation", desc: "PLC programming & SCADA system integration" },
     { name: "Manufacturing Solutions", href: "/services/manufacture-solution", desc: "OEE monitoring & smart warehouse systems" },
     { name: "Utilities", href: "/services/utilities", desc: "Smart resource & utility management" },
-    { name: "Surveillance", href: "/services/surveillance", desc: "AI-powered security & video analytics" },
+    { name: "Surveillance", href: "/services/surveillance", desc: "CCTV, AI-powered security & video analytics" },
     { name: "Tracking Solutions", href: "/services/tracking-solution", desc: "GPS tracking & fleet management" },
     { name: "Smart Industry", href: "/services/smart-industry", desc: "Digital transformation for Industry 4.0" },
   ];
