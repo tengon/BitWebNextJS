@@ -30,7 +30,7 @@ export default function PartnersMarquee() {
 
   // Each logo card has a width of 192px (w-48) and a gap of 64px (gap-16).
   // Total width of one item + gap = 256px.
-  const itemWidth = 512;
+  const itemWidth = 256;
   const translationDistance = partners.length * itemWidth;
 
   return (
