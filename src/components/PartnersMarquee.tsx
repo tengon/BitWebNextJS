@@ -58,7 +58,7 @@ export default function PartnersMarquee() {
               <img
                 src={partner.logo}
                 alt={partner.name}
-                className="max-h-10 max-w-[85%] object-contain filter brightness-95 contrast-105"
+                className="max-h-5 max-w-[95%] object-contain filter brightness-95 contrast-105"
                 onError={(e) => {
                   const target = e.target as HTMLElement;
                   target.style.display = "none";
