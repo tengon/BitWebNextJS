@@ -7,16 +7,16 @@ export default function PartnersMarquee() {
     { name: "ABB", logo: "/images/logos/abb.png" },
     { name: "Acrel", logo: "/images/logos/acrel.png" },
     { name: "Advantech", logo: "/images/logos/advantech.png" },
-    { name: "Beckhoff", logo: "/images/logos/l_beckhoff.png" },
-    { name: "BIT", logo: "/images/logos/bit.png" },
+    { name: "Autonics", logo: "/images/logos/autonics.png" },
+    { name: "Beckhoff", logo: "/images/logos/beckhoff.png" },
     { name: "Delta", logo: "/images/logos/delta.png" },
     { name: "Festo", logo: "/images/logos/festo.png" },
     { name: "Haiwell", logo: "/images/logos/haiwell.png" },
     { name: "HikVision", logo: "/images/logos/HikVision.png" },
-    { name: "IFM", logo: "/images/logos/ifm.png" },
+    { name: "IFM", logo: "/images/logos/ifm02.png" },
     { name: "Itron", logo: "/images/logos/Itron.png" },
     { name: "Kerlink", logo: "/images/logos/kerlink.png" },
-    { name: "Omron", logo: "/images/logos/omron_industrial_automation_logo-600x315.png" },
+    { name: "Omron", logo: "/images/logos/omron-industri.png" },
     { name: "Rujie", logo: "/images/logos/rujie.png" },
     { name: "Schneider", logo: "/images/logos/schneider.png" },
     { name: "Siemens", logo: "/images/logos/siemens.png" },
@@ -53,12 +53,12 @@ export default function PartnersMarquee() {
           {[...partners, ...partners].map((partner, index) => (
             <div
               key={index}
-              className="flex items-center justify-center w-48 h-16 glass rounded-lg opacity-65 hover:opacity-100 transition-opacity duration-300 p-3"
+              className="flex items-center justify-center w-60 h-20 glass border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] rounded-lg opacity-100 hover:opacity-90 transition-opacity duration-300 p-3"
             >
               <img
                 src={partner.logo}
                 alt={partner.name}
-                className="max-h-5 max-w-[95%] object-contain filter brightness-95 contrast-105"
+                className="max-h-20 max-w-[100%] object-contain"
                 onError={(e) => {
                   const target = e.target as HTMLElement;
                   target.style.display = "none";

@@ -47,9 +47,8 @@ export default function Navbar() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <span className="font-heading font-bold text-2xl text-white tracking-tight">
-              BIT <span className="text-[#0099FF]">Automation</span>
-            </span>
+            <img src="/images/logos/BIT-logo-white.png" alt="BIT" className="h-10 w-auto" />
+            <span className="relative -bottom-3 font-bold text-xl text-white tracking-wider">AUTOMATION</span>
           </Link>
 
           {/* Desktop Navigation */}
