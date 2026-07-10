@@ -291,7 +291,7 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
                           >
                             {BenefitIcon && <BenefitIcon size={65} style={accentStyle} />}
                           </div>
-                          <h3 className="font-heading font-bold text-sm mb-3">{benefit.title}</h3>
+                          <h3 className="font-bold text-lg text-gray-400 mb-3">{benefit.title}</h3>
                         </motion.div>
                       );
                     })}
