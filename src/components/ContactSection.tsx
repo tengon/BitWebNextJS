@@ -8,8 +8,8 @@ export default function ContactSection() {
     <section id="contact" className="py-24 relative bg-transparent">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-16">
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -22,24 +22,44 @@ export default function ContactSection() {
 
             <div className="glass p-8 rounded-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#0099FF]/20 blur-[50px] rounded-full"></div>
-              <form className="space-y-6 relative z-10" onSubmit={(e) => e.preventDefault()}>
+              <form
+                className="space-y-6 relative z-10"
+                onSubmit={(e) => {
+                  e.preventDefault();
+
+                  const formData = new FormData(e.currentTarget);
+                  const firstName = formData.get("firstName");
+                  const lastName = formData.get("lastName");
+                  const email = formData.get("email");
+                  const message = formData.get("message");
+
+                  const subject = encodeURIComponent(
+                    `Website Contact - ${firstName} ${lastName}`
+                  );
+                  const body = encodeURIComponent(
+                    `Name: ${firstName} ${lastName}\nEmail: ${email}\n\nMessage:\n${message}`
+                  );
+
+                  window.location.href = `mailto:info@bitautomation.id?subject=${subject}&body=${body}`;
+                }}
+              >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm text-gray-400 font-medium">First Name</label>
-                    <input type="text" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#0099FF] transition-colors" placeholder="John" />
+                    <input name="firstName" type="text" required className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#0099FF] transition-colors" placeholder="John" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm text-gray-400 font-medium">Last Name</label>
-                    <input type="text" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#0099FF] transition-colors" placeholder="Doe" />
+                    <input name="lastName" type="text" required className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#0099FF] transition-colors" placeholder="Doe" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm text-gray-400 font-medium">Email Address</label>
-                  <input type="email" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#0099FF] transition-colors" placeholder="john@company.com" />
+                  <input name="email" type="email" required className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#0099FF] transition-colors" placeholder="john@company.com" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm text-gray-400 font-medium">Message</label>
-                  <textarea rows={4} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#0099FF] transition-colors resize-none" placeholder="How can we help you?"></textarea>
+                  <textarea name="message" rows={4} required className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#0099FF] transition-colors resize-none" placeholder="How can we help you?"></textarea>
                 </div>
                 <button type="submit" className="w-full py-4 bg-gradient-to-r from-[#0099FF] to-[#00D4FF] text-white font-bold rounded-lg hover:shadow-[0_0_20px_rgba(0,153,255,0.4)] transition-all flex items-center justify-center gap-2">
                   Send Message <Send size={18} />
@@ -48,7 +68,7 @@ export default function ContactSection() {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -74,7 +94,7 @@ export default function ContactSection() {
                 <h3 className="font-bold text-white mb-1">Fast Response?</h3>
                 <p className="text-sm text-gray-400">Chat with us directly on WhatsApp</p>
               </div>
-              <a href="https://wa.me/6285803029034" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center text-white hover:bg-green-400 hover:scale-110 transition-all shadow-[0_0_15px_rgba(34,197,94,0.4)]">
+              <a href="https://wa.me/6285117272920" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center text-white hover:bg-green-400 hover:scale-110 transition-all shadow-[0_0_15px_rgba(34,197,94,0.4)]">
                 <MessageSquare size={24} />
               </a>
             </div>
