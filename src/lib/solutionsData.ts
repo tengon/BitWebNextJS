@@ -1,6 +1,7 @@
 export type SolutionFeature = {
   title: string;
   description: string;
+  icon?: string;
 };
 
 export type SolutionBenefit = {
@@ -57,31 +58,37 @@ export const solutionsData: SolutionData[] = [
     features: [
       {
         title: "Real-Time OEE Dashboard",
+        icon: "/images/icons/realtime-oee-icon.png",
         description:
           "Live multi-level dashboards — from machine-level to plant-wide rollup — with color-coded OEE scores, trend charts, and shift comparisons. Accessible from any device including mobile and control room displays.",
       },
       {
         title: "Automated Downtime Tracking",
+        icon: "/images/icons/automated-downtime-tracking-icon.png",
         description:
           "Automatic detection and categorization of machine stops — planned vs. unplanned, breakdown vs. changeover. Eliminates manual operator log books and delivers accurate downtime Pareto analysis in real-time.",
       },
       {
         title: "Production & Shift Reporting",
+        icon: "/images/icons/production-shift-reporting-icon.png",
         description:
           "Automated shift, daily, weekly, and monthly reports emailed directly to management. Custom KPI templates for line leaders, shift supervisors, and production directors — each seeing the data most relevant to their role.",
       },
       {
         title: "Downtime Root Cause Analysis",
+        icon: "/images/icons/downtime-analysis-icon.png",
         description:
           "Drill-down from plant OEE to line to machine to specific fault code. Integrated cause-and-effect tagging lets operators capture the 'why' behind every stop, feeding a continuously improving failure database.",
       },
       {
         title: "Quality & Scrap Tracking",
+        icon: "/images/icons/quality-tracking-icon.png",
         description:
           "Integration with weighing scales, vision systems, and manual reject counters to capture First Pass Yield in real-time. SPC control charts detect quality drift before specification limits are breached.",
       },
       {
         title: "AI Performance Analytics",
+        icon: "/images/icons/performance-analytic-icon.png",
         description:
           "Machine learning models analyze historical OEE patterns to predict future performance drops, recommend optimal maintenance windows, and identify which machines will benefit most from improvement investment.",
       },
