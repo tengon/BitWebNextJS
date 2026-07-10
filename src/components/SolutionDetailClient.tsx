@@ -368,7 +368,7 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
               className="text-center mb-16"
             >
               <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-                Why Choose Our{" "}
+                With{" "}
                 <span
                   className="text-transparent bg-clip-text"
                   style={{ backgroundImage: `linear-gradient(to right, ${solution.accentColor}, ${solution.accentColorSecondary})` }}
@@ -395,16 +395,9 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
                       className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
                       style={accentBgStyle}
                     >
-                      {BenefitIcon && <BenefitIcon size={28} style={accentStyle} />}
+                      {BenefitIcon && <BenefitIcon size={40} style={accentStyle} />}
                     </div>
-                    {benefit.stat && (
-                      <p
-                        className="font-heading font-bold text-3xl mb-2"
-                        style={accentStyle}
-                      >
-                        {benefit.stat}
-                      </p>
-                    )}
+
                     <h3 className="font-heading font-bold text-lg mb-3">{benefit.title}</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">{benefit.description}</p>
                   </motion.div>
