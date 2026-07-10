@@ -212,7 +212,7 @@ export default function Navbar() {
             >
               Get a Quote
             </Link>
-          </div>
+          </div> 
 
           {/* Mobile Menu Toggle */}
           <button
@@ -347,13 +347,13 @@ export default function Navbar() {
             Contact
           </Link>
 
-          <Link
+          {/* <Link
             href="/#contact"
             className="mt-4 px-5 py-3 rounded-md bg-[#0099FF] text-white font-medium hover:bg-[#00D4FF] text-center"
             onClick={() => setMobileMenuOpen(false)}
           >
             Get a Quote
-          </Link>
+          </Link> */}
         </motion.div>
       )}
     </header>

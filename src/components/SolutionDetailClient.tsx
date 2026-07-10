@@ -108,13 +108,13 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative w-full mx-auto h-[220px] sm:h-[300px] md:h-auto md:aspect-[16/9] rounded-2xl md:rounded-3xl p-1.5 glass border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden"
+              className="relative w-full mx-auto h-[220px] sm:h-[300px] md:h-auto md:aspect-[6/4] rounded-2xl md:rounded-3xl p-1.5 glass border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden"
             >
               <div className="w-full h-full relative rounded-xl md:rounded-2xl overflow-hidden bg-[#0b1220]/50">
                 <img
                   src={solution.bgImage}
                   alt={solution.title}
-                  className="w-full h-full object-cover transition-transform duration-1000 hover:scale-[1.02]"
+                  className="h-full relative object-cover transition-transform duration-1000 hover:scale-[1.02]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B1220]/40 via-transparent to-transparent" />
               </div>
@@ -276,7 +276,7 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
                     {solution.benefits.map((benefit, idx) => {
-                      const BenefitIcon = lucideIconMap[benefit.iconName];
+                      const BenefitIcon = (LucideIcons as any)[benefit.iconName];
                       return (
                         <motion.div
                           key={idx}
@@ -407,7 +407,7 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {solution.benefits.map((benefit, idx) => {
-                const BenefitIcon = lucideIconMap[benefit.iconName];
+                const BenefitIcon = (LucideIcons as any)[benefit.iconName];
                 return (
                   <motion.div
                     key={idx}
