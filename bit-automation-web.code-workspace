@@ -1,10 +1,16 @@
 {
 	"folders": [
 		{
+			"name": "BitWebNextJS",
 			"path": "."
 		},
 		{
-			"path": "../../../../Images"
+			"name": "Images",
+			"path": "../../../Images"
+		},
+		{
+			"name": "Logo",
+			"path": "C:/Users/jteng/Pictures/Logo"
 		}
 	],
 	"settings": {
