@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle2, PhoneCall, ArrowRight, TrendingUp } from "lucide-react";
@@ -7,14 +8,21 @@ import type { SolutionData } from "@/lib/solutionsData";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import * as LucideIcons from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type Props = {
   solution: SolutionData;
   prevSolution: SolutionData | null;
   nextSolution: SolutionData | null;
+  contentEng?: string;
+  contentInd?: string;
 };
 
-export default function SolutionDetailClient({ solution, prevSolution, nextSolution }: Props) {
+export default function SolutionDetailClient({ solution, prevSolution, nextSolution, contentEng, contentInd }: Props) {
+  const [lang, setLang] = useState<"eng" | "ind">("eng");
+  const hasMarkdown = !!(contentEng || contentInd);
+  const currentMarkdown = lang === "eng" ? contentEng : contentInd;
   const IconComponent = (LucideIcons as any)[solution.iconName];
 
   const accentStyle = { color: solution.accentColor };
@@ -123,21 +131,110 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
               {/* Main Content */}
               <div className="lg:col-span-2">
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                  <h2 className="font-heading text-5xl font-bold mb-8">
-                    <span
-                      className="text-transparent bg-clip-text"
-                      style={{ backgroundImage: `linear-gradient(to right, ${solution.accentColor}, ${solution.accentColorSecondary})` }}
-                    >
-                      Overview
-                    </span>
-                  </h2>
-                  <div className="space-y-6">
-                    {solution.detailedParagraphs.map((paragraph, idx) => (
-                      <p key={idx} className="text-gray-300 text-lg leading-relaxed">
-                        {paragraph}
-                      </p>
-                    ))}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                    <h2 className="font-heading text-5xl font-bold">
+                      <span
+                        className="text-transparent bg-clip-text"
+                        style={{ backgroundImage: `linear-gradient(to right, ${solution.accentColor}, ${solution.accentColorSecondary})` }}
+                      >
+                        Overview
+                      </span>
+                    </h2>
+
+                    {hasMarkdown && contentEng && contentInd && (
+                      <div className="flex bg-[#12284C]/50 rounded-lg p-1 border border-white/10 w-fit">
+                        <button
+                          onClick={() => setLang("eng")}
+                          className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-all duration-300 ${lang === "eng" ? "bg-white/10 text-white shadow-sm" : "text-gray-400 hover:text-gray-200"}`}
+                        >
+                          English
+                        </button>
+                        <button
+                          onClick={() => setLang("ind")}
+                          className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-all duration-300 ${lang === "ind" ? "bg-white/10 text-white shadow-sm" : "text-gray-400 hover:text-gray-200"}`}
+                        >
+                          Bahasa Indonesia
+                        </button>
+                      </div>
+                    )}
                   </div>
+
+                  {hasMarkdown && currentMarkdown ? (
+                    <div className="max-w-none">
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          table: ({ node, ...props }) => (
+                            <div className="w-full overflow-x-auto my-10 rounded-2xl border shadow-[0_10px_40px_rgba(0,0,0,0.3)] backdrop-blur-sm transition-all duration-300 hover:shadow-[0_15px_50px_rgba(0,0,0,0.4)]"
+                              style={{ borderColor: `${solution.accentColor}30`, backgroundColor: `${solution.accentColor}05` }}>
+                              <table className="w-full text-left border-collapse" {...props} />
+                            </div>
+                          ),
+                          th: ({ node, ...props }) => (
+                            <th className="px-6 py-5 text-sm font-heading font-bold uppercase tracking-wider text-white border-b"
+                              style={{ backgroundColor: `${solution.accentColor}25`, borderColor: `${solution.accentColor}40` }} {...props} />
+                          ),
+                          td: ({ node, ...props }) => (
+                            <td className="px-6 py-4 border-b text-gray-300 transition-colors hover:bg-white/5 text-base leading-relaxed"
+                              style={{ borderColor: `${solution.accentColor}15` }} {...props} />
+                          ),
+                          strong: ({ node, ...props }) => {
+                            const text = props.children?.toString() || "";
+
+                            // Check if this bold text is the OEE formula
+                            if (text.includes("OEE = ") && text.includes("Availability")) {
+                              return (
+                                <span className="block my-10 p-8 rounded-3xl border shadow-2xl relative overflow-hidden bg-[#0B1220]/80 backdrop-blur-md"
+                                  style={{ borderColor: `${solution.accentColor}40` }}>
+                                  <span className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white to-transparent blur-2xl pointer-events-none"></span>
+                                  <span className="relative z-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-4 text-3xl md:text-5xl font-heading font-black tracking-wider leading-relaxed">
+                                    <span className="text-[#00D4FF] drop-shadow-[0_0_8px_rgba(0,212,255,0.4)]">OEE</span>
+                                    <span className="text-gray-300 font-light">=</span>
+                                    <span className="text-[#10b981] drop-shadow-[0_0_8px_rgba(16,185,129,0.4)]">Availability</span>
+                                    <span className="text-gray-500 font-light text-2xl md:text-4xl">×</span>
+                                    <span className="text-[#f59e0b] drop-shadow-[0_0_8px_rgba(245,158,11,0.4)]">Performance</span>
+                                    <span className="text-gray-500 font-light text-2xl md:text-4xl">×</span>
+                                    <span className="text-[#8b5cf6] drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]">Quality</span>
+                                  </span>
+                                </span>
+                              );
+                            }
+
+                            return <strong className="font-bold text-white tracking-wide" {...props} />;
+                          },
+                          h2: ({ node, ...props }) => (
+                            <h2 className="text-3xl font-heading font-bold text-white mt-14 mb-8 flex items-center gap-4" {...props}>
+                              <span className="w-2.5 h-8 rounded-full shadow-[0_0_15px_currentColor]" style={{ backgroundColor: solution.accentColor, color: solution.accentColor }}></span>
+                              {props.children}
+                            </h2>
+                          ),
+                          ul: ({ node, ...props }) => (
+                            <ul className="space-y-4 my-8" {...props} />
+                          ),
+                          li: ({ node, ...props }) => (
+                            <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg group" {...props}>
+                              <div className="mt-2.5 w-2 h-2 rounded-full shrink-0 shadow-[0_0_10px_currentColor] transition-transform duration-300 group-hover:scale-150"
+                                style={{ backgroundColor: solution.accentColor, color: solution.accentColor }}></div>
+                              <span className="flex-1">{props.children}</span>
+                            </li>
+                          ),
+                          p: ({ node, ...props }) => {
+                            return <p className="text-gray-300 text-lg leading-relaxed mb-6" {...props} />
+                          }
+                        }}
+                      >
+                        {currentMarkdown}
+                      </ReactMarkdown>
+                    </div>
+                  ) : (
+                    <div className="space-y-6">
+                      {solution.detailedParagraphs.map((paragraph, idx) => (
+                        <p key={idx} className="text-gray-300 text-lg leading-relaxed">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  )}
                 </motion.div>
               </div>
 

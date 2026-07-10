@@ -1,0 +1,42 @@
+title: OEE
+description: Solusi untuk Meningkatkan Efektivitas Produksi
+author: BIT Automation
+version: 1.0
+
+content: 
+
+**Overall Equipment Effectiveness (OEE)** adalah metode pengukuran yang digunakan untuk mengetahui tingkat efektivitas mesin atau peralatan dalam proses produksi. OEE membantu perusahaan mengidentifikasi kerugian produksi berdasarkan tiga faktor utama, yaitu:
+
+* **Availability (Ketersediaan):** Mengukur waktu mesin beroperasi dibandingkan dengan waktu produksi yang direncanakan.
+* **Performance (Kinerja):** Mengukur kecepatan aktual mesin dibandingkan dengan kecepatan ideal.
+* **Quality (Kualitas):** Mengukur jumlah produk berkualitas baik dibandingkan dengan total produk yang dihasilkan.
+
+Rumus dasar OEE:
+
+**OEE = Availability × Performance × Quality**
+
+## Perbandingan Sistem dengan OEE dan Tanpa OEE
+
+| Dengan Sistem OEE                                          | Tanpa Sistem OEE                                             |
+| ---------------------------------------------------------- | ------------------------------------------------------------ |
+| Efektivitas mesin dapat diukur secara objektif             | Kinerja mesin sulit diukur secara akurat                     |
+| Downtime dapat dipantau dan dianalisis                     | Penyebab downtime sering tidak terdokumentasi                |
+| Sumber kerugian produksi lebih mudah ditemukan             | Masalah produksi cenderung diketahui setelah berdampak besar |
+| Keputusan didasarkan pada data                             | Keputusan lebih banyak berdasarkan asumsi                    |
+| Produktivitas dan kualitas dapat dievaluasi secara berkala | Evaluasi produksi kurang terstruktur                         |
+| Program perbaikan lebih terarah                            | Perbaikan cenderung bersifat reaktif                         |
+
+## Keunggulan Menggunakan OEE
+
+Penerapan OEE memberikan berbagai manfaat bagi perusahaan, antara lain:
+
+* Meningkatkan efektivitas dan produktivitas mesin.
+* Mengurangi downtime serta waktu berhenti yang tidak direncanakan.
+* Mengidentifikasi penyebab utama kerugian produksi.
+* Meningkatkan kecepatan dan stabilitas proses produksi.
+* Mengurangi produk cacat (*reject*) dan pekerjaan ulang (*rework*).
+* Mendukung pengambilan keputusan berdasarkan data.
+* Membantu menentukan prioritas perbaikan dan pemeliharaan mesin.
+* Mendorong peningkatan berkelanjutan (*continuous improvement*).
+
+Dengan OEE, perusahaan dapat memantau kondisi produksi secara lebih terukur, menemukan peluang perbaikan, serta mengoptimalkan penggunaan mesin untuk meningkatkan produktivitas, kualitas, dan efisiensi operasional.
