@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, X } from "lucide-react";
+import { CheckCircle2, X, ArrowRight } from "lucide-react";
 
 export default function FeaturedSolutions() {
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
@@ -11,30 +12,36 @@ export default function FeaturedSolutions() {
   const solutions = [
     {
       title: "Overall Equipment Effectiveness (OEE)",
+      slug: "oee",
       description: "Maximize your manufacturing productivity with real-time insights into availability, performance, and quality.",
       features: ["Real-time dashboard", "Downtime analysis", "Productivity analysis", "Automatic reports", "KPI monitoring"],
       color: "from-blue-600 to-cyan-500",
       imagePattern: "radial-gradient(circle at center, #0099FF 0%, transparent 70%)",
       image: "/images/oee.png",
-      gradient: "from-[#0099FF]/20 to-[#00D4FF]/20"
+      gradient: "from-[#0099FF]/20 to-[#00D4FF]/20",
+      accentColor: "#0099FF",
     },
     {
       title: "Environment Monitoring System",
+      slug: "environment-monitoring",
       description: "Ensure optimal conditions for your industrial processes and maintain compliance with environmental standards.",
       features: ["Temperature & Humidity", "Pressure monitoring", "Water consumption", "Alert notification", "Historical reporting"],
       color: "from-emerald-600 to-teal-500",
       imagePattern: "radial-gradient(circle at center, #10b981 0%, transparent 70%)",
       image: "/images/environment-monitoring.png",
-      gradient: "from-[#10b981]/20 to-[#34d399]/20"
+      gradient: "from-[#10b981]/20 to-[#34d399]/20",
+      accentColor: "#10b981",
     },
     {
       title: "Vibration Monitoring System",
+      slug: "vibration-monitoring",
       description: "Implement predictive maintenance strategies by detecting machine anomalies before they cause costly downtime.",
       features: ["Wireless sensors", "Predictive maintenance", "AI anomaly detection", "Cloud analytics", "Alert system"],
       color: "from-purple-600 to-pink-500",
       imagePattern: "radial-gradient(circle at center, #8b5cf6 0%, transparent 70%)",
       image: "/images/predictive-vibration.png",
-      gradient: "from-[#8b5cf6]/20 to-[#ec4899]/20"
+      gradient: "from-[#8b5cf6]/20 to-[#ec4899]/20",
+      accentColor: "#8b5cf6",
     }
   ];
 
@@ -63,14 +70,22 @@ export default function FeaturedSolutions() {
                 <h3 className="font-heading text-3xl font-bold mb-4">{solution.title}</h3>
                 <p className="text-gray-400 text-lg mb-8">{solution.description}</p>
                 
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                   {solution.features.map((feature, fIndex) => (
                     <li key={fIndex} className="flex items-center gap-3">
-                      <CheckCircle2 className="text-[#00D4FF]" size={20} />
+                      <CheckCircle2 size={20} style={{ color: solution.accentColor }} />
                       <span className="text-gray-200">{feature}</span>
                     </li>
                   ))}
                 </ul>
+
+                <Link
+                  href={`/solutions/${solution.slug}`}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 hover:gap-3 hover:opacity-90"
+                  style={{ background: `linear-gradient(to right, ${solution.accentColor}, ${solution.accentColor}99)` }}
+                >
+                  Learn More <ArrowRight size={16} />
+                </Link>
               </motion.div>
               
               <motion.div 
