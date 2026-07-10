@@ -246,7 +246,7 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
                   <h3 className="font-heading text-2xl font-bold mb-3">Need this solution?</h3>
                   <p className="text-gray-400 mb-6 text-sm leading-relaxed">
                     Our engineering team is ready to design and implement a custom{" "}
-                    {solution.title.toLowerCase()} strategy tailored specifically for your facility.
+                    <strong>{solution.title}</strong> strategy tailored specifically for your facility.
                   </p>
                   <Link
                     href="/#contact"
@@ -259,9 +259,10 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
                   </Link>
 
                   {/* Key Stats */}
-                  <div className="border-t border-white/10 pt-6 grid grid-cols-2 gap-4">
+                  {/*<div className="border-t border-white/10 pt-6 grid grid-cols-2 gap-4">
                     {solution.benefits.slice(0, 4).map((benefit, idx) => (
-                      benefit.stat && (
+                      
+                      benefit.iconName && (
                         <div key={idx} className="text-center">
                           <p className="font-heading font-bold text-2xl" style={accentStyle}>
                             {benefit.stat}
@@ -270,6 +271,30 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
                         </div>
                       )
                     ))}
+                  </div>*/}
+
+                  <div className="grid grid-cols-2 gap-4">
+                    {solution.benefits.map((benefit, idx) => {
+                      const BenefitIcon = (LucideIcons as any)[benefit.iconName];
+                      return (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: idx * 0.1 }}
+                          className="text-center p-4 rounded-2xl bg-gradient-to-b from-[#12284C]/50 to-transparent border border-white/5 hover:border-white/20 transition-all duration-300"
+                        >
+                          <div
+                            className="w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-4"
+                            style={accentBgStyle}
+                          >
+                            {BenefitIcon && <BenefitIcon size={65} style={accentStyle} />}
+                          </div>
+                          <h3 className="font-heading font-bold text-sm mb-3">{benefit.title}</h3>
+                        </motion.div>
+                      );
+                    })}
                   </div>
 
                   {/* Technologies */}
