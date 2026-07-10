@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-body" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-heading" });
 
 export const metadata: Metadata = {
-  title: "BIT Automation | Simplifying Complexity, Delivering Innovation",
+  title: "BIT Automation | Connecting Ideas, Creating the Future",
   description: "We provide intelligent automation, industrial IoT, smart manufacturing, energy monitoring, and digital transformation solutions for modern industries.",
 };
 
