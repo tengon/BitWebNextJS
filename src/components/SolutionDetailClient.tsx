@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle2, PhoneCall, ArrowRight, TrendingUp } from "lucide-react";
 import type { SolutionData } from "@/lib/solutionsData";
@@ -10,6 +11,7 @@ import Footer from "@/components/Footer";
 import * as LucideIcons from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+
 
 type Props = {
   solution: SolutionData;
@@ -324,14 +326,30 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
                     (e.currentTarget as HTMLElement).style.borderColor = "transparent";
                   }}
                 >
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center gap-4 mb-5">
                     <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center transition-colors"
+                      className="w-30 h-30 rounded-xl flex items-center justify-center shrink-0 overflow-hidden transition-all duration-300 group-hover:scale-105"
                       style={accentBgStyle}
                     >
-                      <CheckCircle2 size={20} style={accentStyle} />
+                      {feature.icon ? (
+                        <Image
+                          src={feature.icon}
+                          alt={`${feature.title} icon`}
+                          width={1000}
+                          height={1000}
+                          className="w-100 h-100 object-contain"
+                        />
+                      ) : (
+                        <CheckCircle2
+                          size={240}
+                          style={accentStyle}
+                        />
+                      )}
                     </div>
-                    <h3 className="font-heading font-bold text-lg text-white">{feature.title}</h3>
+
+                    <h3 className="font-heading font-bold text-lg text-white">
+                      {feature.title}
+                    </h3>
                   </div>
                   <p className="text-gray-400 text-sm leading-relaxed">{feature.description}</p>
                 </motion.div>
