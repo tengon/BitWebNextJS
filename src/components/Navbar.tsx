@@ -103,7 +103,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[480px] p-4 glass rounded-xl shadow-2xl border border-white/10 z-50"
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[480px] p-4 glass !bg-[#12284C]/10 rounded-xl shadow-2xl border border-white/10 z-50"
                   >
                     <div className="grid grid-cols-2 gap-2">
                       {servicesItems.map((item) => (
@@ -137,7 +137,7 @@ export default function Navbar() {
               onMouseEnter={() => setSolutionsHovered(true)}
               onMouseLeave={() => setSolutionsHovered(false)}
             >
-              <button className="flex items-center gap-1 text-sm font-medium text-gray-300 hover:text-[#00D4FF] transition-colors cursor-pointer">
+              <button className="   items-center gap-1 text-sm font-medium text-gray-300 hover:text-[#00D4FF] transition-colors cursor-pointer">
                 Solution
                 <ChevronDown size={14} className={cn("transition-transform duration-300", solutionsHovered && "rotate-180")} />
               </button>
@@ -149,7 +149,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[320px] p-3 glass rounded-xl shadow-2xl border border-white/10 z-50"
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[320px] p-3 glass !bg-[#12284C]/10 rounded-xl shadow-2xl border border-white/10 z-50"
                   >
                     <div className="flex flex-col gap-1">
                       {solutionLinks.map((item) => {
@@ -212,7 +212,7 @@ export default function Navbar() {
             >
               Get a Quote
             </Link>
-          </div> 
+          </div>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -264,7 +264,7 @@ export default function Navbar() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  className="overflow-hidden pl-4 flex flex-col gap-1.5 py-2 bg-white/5 rounded-lg mt-1"
+                  className="overflow-hidden pl-4 flex flex-col gap-1.5 py-2 bg-white/10 rounded-lg mt-1"
                 >
                   {servicesItems.map((item) => (
                     <Link
@@ -303,7 +303,7 @@ export default function Navbar() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  className="overflow-hidden pl-4 flex flex-col gap-1.5 py-2 bg-white/5 rounded-lg mt-1"
+                  className="overflow-hidden pl-4 flex flex-col gap-1.5 py-2 bg-white/10 rounded-lg mt-1"
                 >
                   {solutionLinks.map((item) => {
                     const Icon = item.icon;
