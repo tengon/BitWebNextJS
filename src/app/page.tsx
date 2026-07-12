@@ -36,7 +36,7 @@ export default function Home() {
         <AboutSection />
         <VisionMission />
         <ServicesSection />
-        <EcosystemDiagram />
+        {/* <EcosystemDiagram /> */}
         <FeaturedSolutions />
         <ProjectsGallery />
         <PartnersMarquee />
