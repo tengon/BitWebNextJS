@@ -137,7 +137,7 @@ export default function Navbar() {
               onMouseEnter={() => setSolutionsHovered(true)}
               onMouseLeave={() => setSolutionsHovered(false)}
             >
-              <button className="   items-center gap-1 text-sm font-medium text-gray-300 hover:text-[#00D4FF] transition-colors cursor-pointer">
+              <button className="flex items-center gap-1 text-sm font-medium text-gray-300 hover:text-[#00D4FF] transition-colors cursor-pointer">
                 Solution
                 <ChevronDown size={14} className={cn("transition-transform duration-300", solutionsHovered && "rotate-180")} />
               </button>
