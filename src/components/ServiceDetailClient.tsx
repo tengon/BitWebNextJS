@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, CheckCircle2, PhoneCall, ArrowRight } from "lucide-react";
-import type { ServiceData } from "@/lib/servicesData";
+import { ArrowLeft, CheckCircle2, PhoneCall, ArrowRight, type LucideIcon } from "lucide-react";
+import { servicesData, type ServiceData } from "@/lib/servicesData";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import * as LucideIcons from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type Props = {
   service: ServiceData;
@@ -14,8 +15,10 @@ type Props = {
   nextService: ServiceData | null;
 };
 
+const lucideIconMap = LucideIcons as unknown as Record<string, LucideIcon | undefined>;
+
 export default function ServiceDetailClient({ service, prevService, nextService }: Props) {
-  const IconComponent = (LucideIcons as any)[service.iconName];
+  const IconComponent = lucideIconMap[service.iconName];
 
   return (
     <main className="min-h-screen bg-[#0B1220] flex flex-col relative">
@@ -34,7 +37,7 @@ export default function ServiceDetailClient({ service, prevService, nextService 
         <section className="relative pt-32 pb-5 overflow-hidden bg-transparent">
           <div className="container mx-auto px-4 relative z-10">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <Link href="/#services" className="inline-flex items-center gap-2 text-white-400 hover:text-[#00D4FF] transition-colors mb-10 text-sm font-medium group">
+            <Link href="/services" className="inline-flex items-center gap-2 text-white-400 hover:text-[#00D4FF] transition-colors mb-10 text-sm font-medium group">
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to All Services
             </Link>
           </motion.div>
@@ -84,10 +87,66 @@ export default function ServiceDetailClient({ service, prevService, nextService 
       {/* ===== OVERVIEW SECTION ===== */}
       <section className="py-5 border-t border-white/5">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 xl:gap-16 items-start">
+
+            {/* Service Picker / CTA */}
+            <aside className="lg:sticky lg:top-28">
+              <div className="glass rounded-2xl border-[#0099FF]/20 overflow-hidden">
+                <div className="p-5 border-b border-white/10">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#00D4FF] mb-2">Services</p>
+                  <h2 className="font-heading text-2xl font-bold">Choose a Service</h2>
+                </div>
+
+                <nav className="p-3 flex flex-col gap-1">
+                  {servicesData.map((item) => {
+                    const ServiceIcon = lucideIconMap[item.iconName];
+                    const isActive = item.slug === service.slug;
+
+                    return (
+                      <Link
+                        key={item.slug}
+                        href={`/services/${item.slug}`}
+                        className={cn(
+                          "flex items-center gap-3 rounded-xl p-3 text-left transition-all border",
+                          isActive
+                            ? "bg-[#0099FF]/15 border-[#00D4FF]/40 text-white shadow-[0_0_20px_rgba(0,153,255,0.12)]"
+                            : "border-transparent text-gray-400 hover:text-white hover:bg-white/5"
+                        )}
+                      >
+                        <span
+                          className={cn(
+                            "w-9 h-9 rounded-lg flex items-center justify-center shrink-0",
+                            isActive ? "bg-[#00D4FF]/15 text-[#00D4FF]" : "bg-white/5 text-gray-400"
+                          )}
+                        >
+                          {ServiceIcon && <ServiceIcon size={17} />}
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block text-sm font-semibold leading-tight">{item.title}</span>
+                          <span className="block text-xs text-gray-500 leading-snug mt-1">{item.tagline}</span>
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </nav>
+
+                <div className="p-5 border-t border-white/10">
+                  <h3 className="font-heading text-xl font-bold mb-3">Need this solution?</h3>
+                  <p className="text-gray-400 mb-5 text-sm leading-relaxed">
+                    Our engineering team is ready to design and implement a custom {service.title.toLowerCase()} strategy for your facility.
+                  </p>
+                  <Link
+                    href="/#contact"
+                    className="w-full py-3 bg-gradient-to-r from-[#0099FF] to-[#00D4FF] text-white font-bold rounded-lg hover:shadow-[0_0_20px_rgba(0,153,255,0.4)] transition-all flex items-center justify-center gap-2"
+                  >
+                    <PhoneCall size={18} /> Contact Our Experts
+                  </Link>
+                </div>
+              </div>
+            </aside>
 
             {/* Main Content */}
-            <div className="lg:col-span-2">
+            <div>
               <motion.div 
                 initial={{ opacity: 1, y: 20 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
@@ -103,26 +162,9 @@ export default function ServiceDetailClient({ service, prevService, nextService 
                     </p>
                   ))}
                 </div>
-              </motion.div>
-            </div>
 
-            {/* Sidebar / CTA */}
-            <div className="lg:col-span-1">
-              <div className="glass p-8 rounded-2xl border-[#0099FF]/20 sticky top-32">
-                <h3 className="font-heading text-2xl font-bold mb-3">Need this solution?</h3>
-                <p className="text-gray-400 mb-6 text-sm leading-relaxed">
-                  Our engineering team is ready to design and implement a custom {service.title.toLowerCase()} strategy tailored specifically for your facility.
-                </p>
-                <Link
-                  href="/#contact"
-                  className="w-full py-4 bg-gradient-to-r from-[#0099FF] to-[#00D4FF] text-white font-bold rounded-lg hover:shadow-[0_0_20px_rgba(0,153,255,0.4)] transition-all flex items-center justify-center gap-2 mb-6"
-                >
-                  <PhoneCall size={18} /> Contact Our Experts
-                </Link>
-
-                {/* Technologies */}
-                <div className="border-t border-white/10 pt-6">
-                  <h4 className="font-heading font-bold text-sm text-gray-400 uppercase tracking-wider mb-4">Technologies We Use</h4>
+                <div className="mt-10 pt-8 border-t border-white/10">
+                  <h3 className="font-heading font-bold text-sm text-gray-400 uppercase tracking-wider mb-4">Technologies We Use</h3>
                   <div className="flex flex-wrap gap-2">
                     {service.technologies.map((tech, idx) => (
                       <span key={idx} className="text-xs px-3 py-1.5 rounded-full bg-[#12284C] text-gray-300 border border-white/5">
@@ -131,7 +173,7 @@ export default function ServiceDetailClient({ service, prevService, nextService 
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
           </div>
@@ -183,7 +225,7 @@ export default function ServiceDetailClient({ service, prevService, nextService 
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {service.benefits.map((benefit, idx) => {
-              const BenefitIcon = (LucideIcons as any)[benefit.iconName];
+              const BenefitIcon = lucideIconMap[benefit.iconName];
               return (
                 <motion.div
                   key={idx}
@@ -260,7 +302,7 @@ export default function ServiceDetailClient({ service, prevService, nextService 
                   <PhoneCall size={18} /> Get a Free Consultation
                 </Link>
                 <Link
-                  href="/#services"
+                  href="/services"
                   className="px-8 py-4 rounded-lg glass text-white font-medium hover:bg-white/10 transition-all flex items-center justify-center gap-2"
                 >
                   Explore Other Services

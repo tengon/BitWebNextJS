@@ -5,14 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle2, PhoneCall, ArrowRight, type LucideIcon } from "lucide-react";
-import type { SolutionData } from "@/lib/solutionsData";
+import { solutionsData, type SolutionData } from "@/lib/solutionsData";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import * as LucideIcons from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { cn } from "@/lib/utils";
 
-const lucideIconMap = LucideIcons as unknown as Record<string, LucideIcon>;
+const lucideIconMap = LucideIcons as unknown as Record<string, LucideIcon | undefined>;
 
 type Props = {
   solution: SolutionData;
@@ -59,7 +60,7 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
           <div className="container mx-auto px-4 relative z-10">
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
               <Link
-                href="/#solutions"
+                href="/solutions"
                 className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-10 text-sm font-medium group"
               >
                 <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
@@ -129,10 +130,10 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
         {/* ===== OVERVIEW SECTION ===== */}
         <section className="py-5 border-t border-white/5">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16">
+            <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 lg:gap-16 items-start">
 
               {/* Main Content */}
-              <div className="lg:col-span-2 min-w-0">
+              <div className="lg:col-start-2 min-w-0">
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                     <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold">
@@ -242,22 +243,62 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
               </div>
 
               {/* Sidebar CTA */}
-              <div className="lg:col-span-1">
-                <div className="glass p-8 rounded-2xl sticky top-32" style={accentBorderStyle}>
-                  <h3 className="font-heading text-2xl font-bold mb-3">Need this solution?</h3>
-                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">
-                    Our engineering team is ready to design and implement a custom{" "}
-                    <strong>{solution.title}</strong> strategy tailored specifically for your facility.
-                  </p>
-                  <Link
-                    href="/#contact"
-                    className="w-full py-4 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2 mb-6"
-                    style={{
-                      background: `linear-gradient(to right, ${solution.accentColor}, ${solution.accentColorSecondary})`,
-                    }}
-                  >
-                    <PhoneCall size={18} /> Contact Our Experts
-                  </Link>
+              <div className="lg:col-start-1 lg:row-start-1">
+                <div className="glass rounded-2xl sticky top-32 overflow-hidden" style={accentBorderStyle}>
+                  <div className="p-5 border-b border-white/10">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] mb-2" style={accentStyle}>Solutions</p>
+                    <h3 className="font-heading text-2xl font-bold">Choose a Solution</h3>
+                  </div>
+
+                  <nav className="p-3 flex flex-col gap-1">
+                    {solutionsData.map((item) => {
+                      const SolutionIcon = lucideIconMap[item.iconName];
+                      const isActive = item.slug === solution.slug;
+
+                      return (
+                        <Link
+                          key={item.slug}
+                          href={`/solutions/${item.slug}`}
+                          className={cn(
+                            "flex items-center gap-3 rounded-xl p-3 text-left transition-all border",
+                            isActive ? "text-white shadow-[0_0_20px_rgba(0,153,255,0.12)]" : "border-transparent text-gray-400 hover:text-white hover:bg-white/5"
+                          )}
+                          style={isActive ? { backgroundColor: `${solution.accentColor}18`, borderColor: `${solution.accentColor}55` } : undefined}
+                        >
+                          <span
+                            className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+                            style={{
+                              backgroundColor: isActive ? `${solution.accentColor}18` : "rgba(255,255,255,0.05)",
+                              color: isActive ? solution.accentColor : "#9ca3af",
+                            }}
+                          >
+                            {SolutionIcon && <SolutionIcon size={17} />}
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block text-sm font-semibold leading-tight">{item.title}</span>
+                            <span className="block text-xs text-gray-500 leading-snug mt-1">{item.tagline}</span>
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </nav>
+
+                  <div className="p-5 border-t border-white/10">
+                    <h3 className="font-heading text-xl font-bold mb-3">Need this solution?</h3>
+                    <p className="text-gray-400 mb-5 text-sm leading-relaxed">
+                      Our engineering team is ready to design and implement a custom{" "}
+                      <strong>{solution.title}</strong> strategy for your facility.
+                    </p>
+                    <Link
+                      href="/#contact"
+                      className="w-full py-3 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2"
+                      style={{
+                        background: `linear-gradient(to right, ${solution.accentColor}, ${solution.accentColorSecondary})`,
+                      }}
+                    >
+                      <PhoneCall size={18} /> Contact Our Experts
+                    </Link>
+                  </div>
 
                   {/* Key Stats */}
                   {/*<div className="border-t border-white/10 pt-6 grid grid-cols-2 gap-4">
@@ -274,9 +315,9 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
                     ))}
                   </div>*/}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 px-5 pt-5">
                     {solution.benefits.map((benefit, idx) => {
-                      const BenefitIcon = (LucideIcons as any)[benefit.iconName];
+                      const BenefitIcon = lucideIconMap[benefit.iconName];
                       return (
                         <motion.div
                           key={idx}
@@ -299,7 +340,7 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
                   </div>
 
                   {/* Technologies */}
-                  <div className="border-t border-white/10 pt-6 mt-6">
+                  <div className="border-t border-white/10 p-5 mt-6">
                     <h4 className="font-heading font-bold text-sm text-gray-400 uppercase tracking-wider mb-4">
                       Technologies We Use
                     </h4>
@@ -407,7 +448,7 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {solution.benefits.map((benefit, idx) => {
-                const BenefitIcon = (LucideIcons as any)[benefit.iconName];
+                const BenefitIcon = lucideIconMap[benefit.iconName];
                 return (
                   <motion.div
                     key={idx}
@@ -514,7 +555,7 @@ export default function SolutionDetailClient({ solution, prevSolution, nextSolut
                     <PhoneCall size={18} /> Get a Free Consultation
                   </Link>
                   <Link
-                    href="/#solutions"
+                    href="/solutions"
                     className="px-5 sm:px-8 py-4 rounded-lg glass text-white font-medium hover:bg-white/10 transition-all flex items-center justify-center gap-2"
                   >
                     Explore Other Solutions
