@@ -102,12 +102,12 @@ export default function Navbar() {
                   </div>
                   <div className="py-1">
                     {[
-                      { label: "OEE & Machine Monitoring", href: "#", icon: "⚙️" },
-                      { label: "HSE", href: "#", icon: "🦺" },
-                      { label: "Tracking", href: "http://track.bitautomation.id", icon: "📍", external: true },
-                      { label: "Environment Monitoring", href: "#", icon: "🌿" },
-                      { label: "BMS (Building Monitoring System)", href: "#", icon: "🏢" },
-                      { label: "CCTV & VMS", href: "#", icon: "📹" },
+                      { label: "OEE & Machine Monitoring", href: "https://iot.bitautomation.id", icon: "⚙️", external: true },
+                      { label: "HSE", href: "https://hse.bitautomation.id", icon: "🦺", external: true },
+                      { label: "Tracking", href: "https://track.bitautomation.id", icon: "📍", external: true },
+                      { label: "Environment Monitoring", href: "https://env.bitautomation.id", icon: "🌿", external: true },
+                      { label: "BMS (Building Monitoring System)", href: "https://bms.bitautomation.id", icon: "🏢", external: true },
+                      { label: "CCTV & VMS", href: "https://cctv.bitautomation.id", icon: "📹", external: true },
                     ].map((item) => (
                       <Link
                         key={item.label}
