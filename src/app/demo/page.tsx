@@ -11,7 +11,7 @@ const demoApps = [
     title: "OEE & Machine Monitoring",
     description:
       "Monitor Overall Equipment Effectiveness secara real-time. Pantau performa mesin, downtime, dan efisiensi produksi dalam satu dashboard terintegrasi.",
-    href: "https://oee.bitautomation.id",
+    href: "https://iot.bitautomation.id",
     external: true,
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
