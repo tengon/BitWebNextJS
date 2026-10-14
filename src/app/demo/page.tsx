@@ -11,8 +11,8 @@ const demoApps = [
     title: "OEE & Machine Monitoring",
     description:
       "Monitor Overall Equipment Effectiveness secara real-time. Pantau performa mesin, downtime, dan efisiensi produksi dalam satu dashboard terintegrasi.",
-    href: "#",
-    external: false,
+    href: "https://oee.bitautomation.id",
+    external: true,
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
@@ -23,16 +23,16 @@ const demoApps = [
     color: "from-[#0099FF] to-[#00D4FF]",
     glowColor: "rgba(0, 153, 255, 0.3)",
     tag: "Manufacturing",
-    available: false,
-    bgImage: null,
+    available: true,
+    bgImage: "/images/demo/oee_ico.jpeg",
   },
   {
     id: "hse",
     title: "HSE",
     description:
       "Health, Safety & Environment monitoring system. Kelola keselamatan kerja, deteksi risiko, dan pastikan kepatuhan HSE standar internasional secara otomatis.",
-    href: "#",
-    external: false,
+    href: "https://hse.bitautomation.id",
+    external: true,
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
@@ -42,15 +42,15 @@ const demoApps = [
     color: "from-[#22C55E] to-[#16A34A]",
     glowColor: "rgba(34, 197, 94, 0.3)",
     tag: "Safety",
-    available: false,
-    bgImage: null,
+    available: true,
+    bgImage: "/images/demo/HSE.jpeg",
   },
   {
     id: "tracking",
     title: "Tracking",
     description:
       "Sistem pelacakan aset dan kendaraan secara real-time dengan GPS terintegrasi. Optimalkan rute, monitor posisi, dan tingkatkan efisiensi operasional fleet Anda.",
-    href: "http://track.bitautomation.id",
+    href: "https://track.bitautomation.id",
     external: true,
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -355,7 +355,13 @@ function DemoCard({ app }: { app: (typeof demoApps)[number] }) {
             >
               Buka Demo
               <svg
-                className="w-4 h-4 transition-transform group-hover:translate-x-1 text-[#F59E0B]"
+                className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${
+                  app.id === "oee"
+                    ? "text-[#00D4FF]"
+                    : app.id === "hse"
+                    ? "text-[#22C55E]"
+                    : "text-[#F59E0B]"
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
